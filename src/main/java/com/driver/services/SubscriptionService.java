@@ -62,7 +62,25 @@ public class SubscriptionService {
         if(user.getSubscription().getSubscriptionType()==SubscriptionType.ELITE){
             throw new Exception("Already the best Subscription");
         }
-        return null;
+
+        int currentPlanBill = user.getSubscription().getTotalAmountPaid();
+        int noOfScreen = user.getSubscription().getNoOfScreensSubscribed();
+        int updatePlanBill = 0;
+        if(user.getSubscription().getSubscriptionType()==SubscriptionType.BASIC){
+            updatePlanBill = 800 + 250*noOfScreen;
+            Subscription currentSubscription = user.getSubscription();
+            currentSubscription.setSubscriptionType(SubscriptionType.PRO);
+            user.setSubscription(currentSubscription);
+        }
+        else if(user.getSubscription().getSubscriptionType()==SubscriptionType.PRO){
+            updatePlanBill = 1000 + 350*noOfScreen;
+            Subscription currentSubscription = user.getSubscription();
+            currentSubscription.setSubscriptionType(SubscriptionType.ELITE);
+            user.setSubscription(currentSubscription);
+        }
+        userRepository.save(user);
+        int differ = updatePlanBill - currentPlanBill;
+        return differ;
     }
 
     public Integer calculateTotalRevenueOfHotstar(){
