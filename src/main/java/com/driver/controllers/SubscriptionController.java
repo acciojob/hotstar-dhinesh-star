@@ -28,17 +28,18 @@ public class SubscriptionController {
 
 
     @PutMapping("/upgradeSubscription/{userId}")
-    public Integer upgradeSubscription(@PathVariable("userId")Integer userId){
+    public Integer upgradeSubscription(@PathVariable("userId")Integer userId) throws Exception{
 
         //In this function you need to upgrade the subscription to  its next level
         //ie if You are A BASIC subscriber update to PRO and if You are a PRO upgrade to ELITE.
         //Incase you are already an ELITE member throw an Exception
         //and at the end return the difference in fare that you need to pay to get this subscription done.
-        try{
-            return subscriptionService.upgradeSubscription(userId);
-        }catch (Exception e){
-            return -1;
-        }
+//        try{
+//            return subscriptionService.upgradeSubscription(userId);
+//        }catch (Exception e){
+//            return -1;
+//        }
+        return subscriptionService.upgradeSubscription(userId);
     }
 
     @GetMapping("/calculateTotalRevenue")
