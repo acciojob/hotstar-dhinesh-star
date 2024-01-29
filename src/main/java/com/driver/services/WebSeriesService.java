@@ -42,9 +42,9 @@ public class WebSeriesService {
         productionHouse.setRatings(newRating);
         webSeries.setProductionHouse(productionHouse);
         productionHouse.getWebSeriesList().add(webSeries);
-//        WebSeries newWebSeriesAdded = webSeriesRepository.save(webSeries);
-        productionHouseRepository.save(productionHouse);
-        return webSeries.getId();
+        WebSeries newWebSeriesAdded = webSeriesRepository.save(webSeries);
+//        productionHouseRepository.save(productionHouse);
+        return newWebSeriesAdded.getId();
     }
 
 }
