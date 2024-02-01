@@ -20,18 +20,13 @@ public class WebSeriesService {
     @Autowired
     ProductionHouseRepository productionHouseRepository;
 
-    public WebSeries findBySeriesName(String seriesName){
-        WebSeries webSeries = webSeriesRepository.findBySeriesName(seriesName);
-        return webSeries;
-    }
-
     public Integer addWebSeries(WebSeriesEntryDto webSeriesEntryDto)throws  Exception{
 
         //Add a webSeries to the database and update the ratings of the productionHouse
         //Incase the seriesName is already present in the Db throw Exception("Series is already present")
         //use function written in Repository Layer for the same
         //Dont forget to save the production and webseries Repo
-        WebSeries webSeries1 = findBySeriesName(webSeriesEntryDto.getSeriesName());
+        WebSeries webSeries1 = webSeriesRepository.findBySeriesName(webSeriesEntryDto.getSeriesName());
         if(webSeries1!=null){
             throw new Exception("Series is already present");
         }
